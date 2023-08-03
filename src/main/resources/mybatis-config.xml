@@ -17,6 +17,6 @@
   </environments>
   
   <mappers>
-    <!--  mapper resource="org/mybatis/example/BlogMapper.xml"/> -->
+    <mapper resource="mapper/memberMapper.xml"/> 
   </mappers>
 </configuration>
