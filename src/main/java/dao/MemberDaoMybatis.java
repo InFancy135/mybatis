@@ -15,7 +15,15 @@ public class MemberDaoMybatis implements MemberDao {
 	
 	@Override
 	public Member saveMember(Member member) {
-		return null;
+		try(SqlSession sqlSession = sqlSessionFactory.openSession()){
+		MemberMapper mapper =	sqlSession.getMapper(MemberMapper.class);
+		int result = mapper.saveMember(member);
+		System.out.println("result: " + result);
+		sqlSession.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return member;
 	}
 
 	@Override
@@ -53,7 +61,10 @@ public class MemberDaoMybatis implements MemberDao {
 
 	public static void main(String[] args) {
 		MemberDao dao = new MemberDaoMybatis();
-		Member member = dao.findMemberById(1L);
-		System.out.println("member: " + member);
+//		Member member = dao.findMemberById(1L);
+//		System.out.println("member: " + member);
+		Member member = new Member("user3", "FEMALE", "2002-03-13", "user3@naver.com");
+		Member savedMember = dao.saveMember(member);
+		System.out.println("savedMember: " + savedMember);
 	}
 }

@@ -3,6 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.MemberMapper">
+
+<insert id="saveMember">
+<selectKey keyProperty="id" resultType="long" order="BEFORE">
+select seq_member.nextval from dual
+</selectKey>
+
+insert into member(
+		id, 
+		name,
+		gender,
+		birth,
+		email
+	) values(
+		seq_member.nextval,
+		#{name},
+		#{gender},
+		#{birth},
+		#{email}
+	)
+</insert>
+
 <select id="findMemberById" resultType="vo.Member">
 	select
 		id,
@@ -15,5 +36,20 @@
 	where
 		id= #{id}
 </select>
+
+<select id="findMembers" resultType="vo.Member">
+	select
+		id,
+		name,
+		gender,
+		birth,
+		email
+	from
+		member
+</select>
+
+<delete id="deleteMember">
+	delete from where id= #{id}
+</delete>
   
 </mapper>

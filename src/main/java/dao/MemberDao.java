@@ -17,7 +17,7 @@ public interface MemberDao {
     // 회원정보 수정
     public Member updateMember(Member member);
 
-    // 아이이로 회원정보 삭제
+    // 아이디로 회원정보 삭제
     public void removeMember(Long id);
 
 }
