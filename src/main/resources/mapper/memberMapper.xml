@@ -5,6 +5,8 @@
 <mapper namespace="dao.MemberMapper">
 
 <insert id="saveMember">
+
+
 <selectKey keyProperty="id" resultType="long" order="BEFORE">
 select seq_member.nextval from dual
 </selectKey>
@@ -47,6 +49,17 @@ insert into member(
 	from
 		member
 </select>
+
+<update id="uppdateMember">
+	update member
+	set
+		name = # [name],
+		gender = #[gender],
+		birth = #[birth],
+		email = #[email]
+	where
+		id = #[id];
+</update>
 
 <delete id="deleteMember">
 	delete from where id= #{id}
